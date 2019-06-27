@@ -7,7 +7,7 @@
 # 内容说明
     main.cpp是关键算法，现场调个阈值就行了，关键部分写了些注释。
 # 新版本说明
-    VersionArmor.cpp是传移动角度的版本，需要opencv3以上。
+    VersionAnger.cpp是传移动角度的版本，需要opencv3以上。
     carmera文件夹是采集标定图像的代码。
     camera_calib是获得相机内参calib.xml的代码。
     自己要标定相机获得calib.xml
