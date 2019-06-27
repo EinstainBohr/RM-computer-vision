@@ -143,7 +143,7 @@ int main()
            fs["Distortion"] >> cameraDistCoeffs;
            //std::cout << " Camera intrinsic: " << cameraMatrix.rows << "x" << cameraMatrix.cols << std::endl;
 
-           vector<cv::Point3f> objectPoints;
+           vector<cv::Point3f> objectPoints;                //装甲板空间坐标
            objectPoints.push_back(cv::Point3f(0, 0, 0));
            objectPoints.push_back(cv::Point3f(13.5, 0, 0));
            objectPoints.push_back(cv::Point3f(13.5, 5.8, 0));
@@ -151,7 +151,7 @@ int main()
            objectPoints.push_back(cv::Point3f(6.7,2.9, 0));
 
 
-           vector<cv::Point2f> imagePoints;
+           vector<cv::Point2f> imagePoints;                 //装甲板像素坐标
 
            int x1 =  center_x - width_equal, y1= center_y - height_equal;
            int x2 =  center_x + width_equal, y2= center_y + height_equal;
