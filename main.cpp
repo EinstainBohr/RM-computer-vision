@@ -11,7 +11,6 @@ using namespace cv;
 
 int main()
 {
-    init_serial();
     clock_t start,finish;
     double totaltime, heights[16];
     int hi = 0;
@@ -107,16 +106,6 @@ int main()
                      heights[hi] = (rrect.size.height+rrectA.size.height)/2;
                      R[hi] = rrect;
                      RA[hi] = rrectA;
-                     /*
-                     cout << "height_diffrence  "<<difference <<endl;
-                     cout <<"slop_low  "  << slop_low<<"  " <<endl;
-                     cout <<"width_difference  " <<difference3 <<endl;
-                     cout <<"aim  " <<aim <<endl;
-                     cout <<"slop" <<slop <<endl;
-                     cout <<"angle" <<rrect.angle <<" " <<rrectA.angle <<endl;
-                     cout <<"distance" <<distance <<endl;
-                   cout <<"height" <<height <<endl <<endl;
-*/
                      hi++;
                  }
              }
@@ -136,7 +125,6 @@ int main()
                        (R[mark].center.y+RA[mark].center.y)/2),
                        15,cv::Scalar(0,0,255),4);
 
-           //cout  << abs(R[mark].center.x-RA[mark].center.x);
            double lessx  =  320 - (R[mark].center.x+RA[mark].center.x)/2;   //坐标差
            double lessy =   240 - (R[mark].center.y+RA[mark].center.y)/2;
            //cout <<  lessx << "  " << lessy << " " << down <<endl;
@@ -148,9 +136,8 @@ int main()
 
         finish = clock();
         totaltime=(double)(finish-start)/CLOCKS_PER_SEC;
-        //cout<<"Time whole"<<totaltime<<"秒！"<<endl;
+        cout<<"Time whole"<<totaltime<<"秒！"<<endl;
         hi = 0;
     }
-   
-}
 
+}
