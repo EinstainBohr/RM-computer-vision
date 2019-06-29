@@ -18,7 +18,7 @@ int main()
     for (int i=1; i<=12; i++) {
 
         std::stringstream str;
-        str << "/home/einstein/桌面/vision4/carmera_blue" << std::setw(2) << std::setfill('0') << i << ".jpg";
+        str << "/home/einstein/桌面/vision4/carmera_blue" << i << ".jpg";
         std::cout << str.str() << std::endl;
 
         filelist.push_back(str.str());
