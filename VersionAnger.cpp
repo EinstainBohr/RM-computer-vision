@@ -134,7 +134,7 @@ int main()
            double center_x = (R[mark].center.x+RA[mark].center.x)/2;
            double center_y = (R[mark].center.y+RA[mark].center.y)/2;
            double height_equal = abs((R[mark].size.height+RA[mark].size.height)/2);
-           double width_equal =  abs((R[mark].size.width+RA[mark].size.width)/2);
+           double width_equal =  abs(R[mark].size.width+RA[mark].size.width);
 
            Mat cameraMatrix;
            Mat cameraDistCoeffs;
@@ -145,16 +145,16 @@ int main()
 
            vector<cv::Point3f> objectPoints;                //装甲板空间坐标
            objectPoints.push_back(cv::Point3f(0, 0, 0));
-           objectPoints.push_back(cv::Point3f(13.5, 0, 0));
-           objectPoints.push_back(cv::Point3f(13.5, 5.8, 0));
-           objectPoints.push_back(cv::Point3f(0, 5.8, 0));
-           objectPoints.push_back(cv::Point3f(6.7,2.9, 0));
+           objectPoints.push_back(cv::Point3f(13.8, 0, 0));
+           objectPoints.push_back(cv::Point3f(13.8, 5.2, 0));
+           objectPoints.push_back(cv::Point3f(0, 5.2, 0));
+           objectPoints.push_back(cv::Point3f(6.9,2.1, 0));
 
 
            vector<cv::Point2f> imagePoints;                 //装甲板像素坐标
 
-           int x1 =  center_x - width_equal, y1= center_y - height_equal;
-           int x2 =  center_x + width_equal, y2= center_y + height_equal;
+           int x1 =  center_x - height_equal, y1= center_y - width_equal;
+           int x2 =  center_x +  height_equal, y2= center_y + width_equal;
            imagePoints.push_back(Point2f(x1, y1));
            imagePoints.push_back(Point2f(x2, y1));
            imagePoints.push_back(Point2f(x2, y2));
