@@ -143,18 +143,26 @@ int main()
            fs["Distortion"] >> cameraDistCoeffs;
            //std::cout << " Camera intrinsic: " << cameraMatrix.rows << "x" << cameraMatrix.cols << std::endl;
 
-           vector<cv::Point3f> objectPoints;                //装甲板空间坐标
+           vector<cv::Point3f> objectPoints;                //小装甲板空间坐标
            objectPoints.push_back(cv::Point3f(0, 0, 0));
-           objectPoints.push_back(cv::Point3f(13.8, 0, 0));
-           objectPoints.push_back(cv::Point3f(13.8, 5.2, 0));
+           objectPoints.push_back(cv::Point3f(14, 0, 0));
+           objectPoints.push_back(cv::Point3f(14, 5.2, 0));
            objectPoints.push_back(cv::Point3f(0, 5.2, 0));
-           objectPoints.push_back(cv::Point3f(6.9,2.1, 0));
+           objectPoints.push_back(cv::Point3f(7,2.1, 0));
+
+           vector<cv::Point3f> objectPoints2;                //大装甲板空间坐标
+           objectPoints2.push_back(cv::Point3f(0, 0, 0));
+           objectPoints2.push_back(cv::Point3f(23, 0, 0));
+           objectPoints2.push_back(cv::Point3f(23, 5.2, 0));
+           objectPoints2.push_back(cv::Point3f(0, 5.2, 0));
+           objectPoints2.push_back(cv::Point3f(11.5,2.1, 0));
 
 
            vector<cv::Point2f> imagePoints;                 //装甲板像素坐标
 
-           int x1 =  center_x - height_equal, y1= center_y - width_equal;
-           int x2 =  center_x +  height_equal, y2= center_y + width_equal;
+           float x1 =  center_x - height_equal, y1= center_y - width_equal;
+           float x2 =  center_x +  height_equal, y2= center_y + width_equal;
+
            imagePoints.push_back(Point2f(x1, y1));
            imagePoints.push_back(Point2f(x2, y1));
            imagePoints.push_back(Point2f(x2, y2));
@@ -162,11 +170,17 @@ int main()
            imagePoints.push_back(Point2f(center_x, center_y));
 
 
+           line(binary,Point(x1, y1),Point(x2, y1),cv::Scalar(0, 255, 0),4);
+           line(binary,Point(x1, y2),Point(x2, y2),cv::Scalar(0, 255, 0),4);
+
+           float whichone = abs(x1-x2)/abs(y1-y2);
 
            Mat rvec, tvec;
-           solvePnP(objectPoints, imagePoints,      // corresponding 3D/2D pts
-                        cameraMatrix, cameraDistCoeffs, // calibration
-                        rvec, tvec);
+           if( whichone > 3.6)
+              solvePnP(objectPoints2, imagePoints,cameraMatrix, cameraDistCoeffs, rvec, tvec);
+           else
+              solvePnP(objectPoints, imagePoints, cameraMatrix, cameraDistCoeffs, rvec, tvec);
+
 
            Mat rotation;
            // convert vector-3 rotation
@@ -200,6 +214,5 @@ int main()
         cout<<"Time whole"<<totaltime<<"秒！"<<endl;
         hi = 0;
     }
-   
-}
 
+}
