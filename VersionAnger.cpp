@@ -171,9 +171,12 @@ int main()
            line(binary,Point(x1, y2),Point(x2, y2),cv::Scalar(0, 255, 0),4);
 
            float whichone = abs(x1-x2)/abs(y1-y2);
+           float loss = abs(whichone / 2.4 - 1)*100;
+
+           cout << "误差:  "<< loss<< "%" << endl;
 
            Mat rvec, tvec;
-           if( whichone > 3.2)
+           if( whichone > 3.6)
               solvePnP(objectPoints2, imagePoints,cameraMatrix, cameraDistCoeffs, rvec, tvec);
            else
               solvePnP(objectPoints, imagePoints, cameraMatrix, cameraDistCoeffs, rvec, tvec);
