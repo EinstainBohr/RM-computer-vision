@@ -173,7 +173,7 @@ int main()
            float whichone = abs(x1-x2)/abs(y1-y2);
            float loss = abs(whichone / 2.4 - 1)*100;
 
-           cout << "误差:  "<< loss<< "%" << endl;
+           cout << "误差:  "<< loss<< "%" << endl << endl;
 
            Mat rvec, tvec;
            if( whichone > 3.2)
@@ -211,7 +211,7 @@ int main()
 
         finish = clock();
         totaltime=(double)(finish-start)/CLOCKS_PER_SEC;
-        cout<<"Time whole"<<totaltime<<"秒！"<<endl;
+        cout<<"Time whole"<<totaltime<<"秒！"<<endl <<endl;
         hi = 0;
     }
 
