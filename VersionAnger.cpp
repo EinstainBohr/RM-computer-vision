@@ -8,8 +8,6 @@
 
 #define PI 3.1415926
 
-
-
 using namespace std;
 using namespace cv;
 
@@ -126,10 +124,6 @@ int main()
             }
         }
         if(hi != 0){
-            cv::circle(binary,Point((R[mark].center.x+RA[mark].center.x)/2,
-                       (R[mark].center.y+RA[mark].center.y)/2),
-                       abs((R[mark].size.height+RA[mark].size.height)/4),cv::Scalar(0,0,255),4);
-
 
            double center_x = (R[mark].center.x+RA[mark].center.x)/2;
            double center_y = (R[mark].center.y+RA[mark].center.y)/2;
@@ -172,6 +166,10 @@ int main()
 
            line(binary,Point(x1, y1),Point(x2, y1),cv::Scalar(0, 255, 0),4);
            line(binary,Point(x1, y2),Point(x2, y2),cv::Scalar(0, 255, 0),4);
+
+           cv::circle(binary,Point((R[mark].center.x+RA[mark].center.x)/2,
+                      (R[mark].center.y+RA[mark].center.y)/2),
+                      abs((R[mark].size.height+RA[mark].size.height)/4),cv::Scalar(0,0,255),4);
 
            float whichone = abs(x1-x2)/abs(y1-y2);
 
