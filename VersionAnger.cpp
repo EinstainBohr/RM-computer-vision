@@ -128,13 +128,13 @@ int main()
         if(hi != 0){
             cv::circle(binary,Point((R[mark].center.x+RA[mark].center.x)/2,
                        (R[mark].center.y+RA[mark].center.y)/2),
-                       15,cv::Scalar(0,0,255),4);
+                       abs((R[mark].size.height+RA[mark].size.height)/4),cv::Scalar(0,0,255),4);
 
 
            double center_x = (R[mark].center.x+RA[mark].center.x)/2;
            double center_y = (R[mark].center.y+RA[mark].center.y)/2;
-           double height_equal = abs((R[mark].size.height+RA[mark].size.height)/2);
-           double width_equal =  abs(R[mark].size.width+RA[mark].size.width);
+           double height_equal = abs(R[mark].center.x-RA[mark].center.x)/2;
+           double width_equal =  abs((R[mark].size.height+RA[mark].size.height)/4);
 
            Mat cameraMatrix;
            Mat cameraDistCoeffs;
@@ -216,3 +216,4 @@ int main()
     }
 
 }
+
