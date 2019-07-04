@@ -17,7 +17,7 @@ int main()
     clock_t start,finish;
     double totaltime, heights[16];
     int hi = 0;
-    VideoCapture capture("/home/einstein/桌面/save_12.avi");
+    VideoCapture capture("/home/einstein/桌面/步兵蓝2.avi");
     //VideoCapture capture(1);
     Mat frame, binary;
     RotatedRect RA[16], R[16];
@@ -31,7 +31,7 @@ int main()
 
         cvtColor(frame,frame,COLOR_BGR2GRAY);
 
-        threshold(frame, frame, 160, 255,cv::THRESH_BINARY);//调阈值就差不多了
+        threshold(frame, frame, 210, 255,cv::THRESH_BINARY);//调阈值就差不多了
         // Find all the contours in the thresholded image
         vector<vector<Point>> contours;
         imshow("sdfa",frame);
@@ -167,8 +167,12 @@ int main()
            imagePoints.push_back(Point2f(center_x, center_y));
 
 
-           line(binary,Point(x1, y1),Point(x2, y1),cv::Scalar(0, 255, 0),4);
-           line(binary,Point(x1, y2),Point(x2, y2),cv::Scalar(0, 255, 0),4);
+           Point2f armor1[4],armor2[4];
+           R[mark].points(armor1);
+           RA[mark].points(armor2);
+
+           line(binary,armor1[0],armor2[0],cv::Scalar(0, 255, 0),4);
+           line(binary,armor1[2],armor2[2],cv::Scalar(0, 255, 0),4);
 
            float whichone = abs(x1-x2)/abs(y1-y2);
            float loss = abs(whichone / 2.4 - 1)*100;
