@@ -173,7 +173,7 @@ int main()
            float whichone = abs(x1-x2)/abs(y1-y2);
 
            Mat rvec, tvec;
-           if( whichone > 3.6)
+           if( whichone > 3.2)
               solvePnP(objectPoints2, imagePoints,cameraMatrix, cameraDistCoeffs, rvec, tvec);
            else
               solvePnP(objectPoints, imagePoints, cameraMatrix, cameraDistCoeffs, rvec, tvec);
