@@ -17,7 +17,7 @@ int main()
     clock_t start,finish;
     double totaltime, heights[16];
     int hi = 0;
-    VideoCapture capture("/home/einstein/桌面/步兵蓝2.avi");
+    VideoCapture capture("/home/einstein/桌面/save_10.avi");
     //VideoCapture capture(1);
     Mat frame, binary;
     RotatedRect RA[16], R[16];
@@ -31,7 +31,7 @@ int main()
 
         cvtColor(frame,frame,COLOR_BGR2GRAY);
 
-        threshold(frame, frame, 210, 255,cv::THRESH_BINARY);//调阈值就差不多了
+        threshold(frame, frame, 160, 255,cv::THRESH_BINARY);//调阈值就差不多了
         // Find all the contours in the thresholded image
         vector<vector<Point>> contours;
         imshow("sdfa",frame);
@@ -143,9 +143,9 @@ int main()
            vector<cv::Point3f> objectPoints;                //小装甲板空间坐标
            objectPoints.push_back(cv::Point3f(0, 0, 0));
            objectPoints.push_back(cv::Point3f(13.5, 0, 0));
-           objectPoints.push_back(cv::Point3f(13.5, 5.6, 0));
-           objectPoints.push_back(cv::Point3f(0, 5.6, 0));
-           
+           objectPoints.push_back(cv::Point3f(13.5, 5.4, 0));
+           objectPoints.push_back(cv::Point3f(0, 5.4, 0));
+
 
            vector<cv::Point3f> objectPoints2;                //大装甲板空间坐标
            objectPoints2.push_back(cv::Point3f(0, 0, 0));
