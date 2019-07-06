@@ -150,8 +150,8 @@ int main()
            vector<cv::Point3f> objectPoints2;                //大装甲板空间坐标
            objectPoints2.push_back(cv::Point3f(0, 0, 0));
            objectPoints2.push_back(cv::Point3f(23, 0, 0));
-           objectPoints2.push_back(cv::Point3f(23, 5.6, 0));
-           objectPoints2.push_back(cv::Point3f(0, 5.6, 0));
+           objectPoints2.push_back(cv::Point3f(23, 5.4, 0));
+           objectPoints2.push_back(cv::Point3f(0, 5.4, 0));
 
 
            vector<cv::Point2f> imagePoints;                 //装甲板像素坐标
