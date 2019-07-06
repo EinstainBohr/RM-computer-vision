@@ -145,14 +145,13 @@ int main()
            objectPoints.push_back(cv::Point3f(13.5, 0, 0));
            objectPoints.push_back(cv::Point3f(13.5, 5.4, 0));
            objectPoints.push_back(cv::Point3f(0, 5.4, 0));
-           objectPoints.push_back(cv::Point3f(6.75,2.7, 0));
+           
 
            vector<cv::Point3f> objectPoints2;                //大装甲板空间坐标
            objectPoints2.push_back(cv::Point3f(0, 0, 0));
            objectPoints2.push_back(cv::Point3f(23, 0, 0));
            objectPoints2.push_back(cv::Point3f(23, 5.6, 0));
            objectPoints2.push_back(cv::Point3f(0, 5.6, 0));
-           objectPoints2.push_back(cv::Point3f(11.5,2.8, 0));
 
 
            vector<cv::Point2f> imagePoints;                 //装甲板像素坐标
@@ -164,7 +163,6 @@ int main()
            imagePoints.push_back(Point2f(x2, y1));
            imagePoints.push_back(Point2f(x2, y2));
            imagePoints.push_back(Point2f(x1, y2));
-           imagePoints.push_back(Point2f(center_x, center_y));
 
 
            Point2f armor1[4],armor2[4];
