@@ -6,10 +6,10 @@
 
 # 内容说明
 
-#　PlanA
+# PlanA
     main.cpp是传坐标差版本，现场调个阈值就行了，关键部分写了些注释。
 　
-#　PlanB
+# PlanB
 
     VersionAnger.cpp是传移动角度的版本
     carmera文件夹是采集标定图像的代码。
