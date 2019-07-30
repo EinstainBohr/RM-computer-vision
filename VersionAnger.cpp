@@ -1,9 +1,6 @@
 #include <time.h>
 #include <iostream>
-#include <opencv2/core.hpp>
-#include <opencv2/highgui.hpp>
-#include <opencv2/imgproc.hpp>
-#include <opencv2/calib3d.hpp>
+#include <opencv2/opencv.hpp>
 #include <math.h>
 
 #define PI 3.1415926
@@ -22,6 +19,22 @@ int main()
     Mat frame, binary;
     RotatedRect RA[16], R[16];
 
+    int stateNum = 4;
+    int measureNum = 2;
+    KalmanFilter KF(stateNum, measureNum, 0);
+    //Mat processNoise(stateNum, 1, CV_32F);
+    Mat measurement = Mat::zeros(measureNum, 1, CV_32F);
+    KF.transitionMatrix = (Mat_<float>(stateNum, stateNum) << 1, 0, 1, 0,//A 状态转移矩阵
+        0, 1, 0, 1,
+        0, 0, 1, 0,
+        0, 0, 0, 1);
+    //这里没有设置控制矩阵B，默认为零
+    setIdentity(KF.measurementMatrix);//H=[1,0,0,0;0,1,0,0] 测量矩阵
+    setIdentity(KF.processNoiseCov, Scalar::all(1e-5));//Q高斯白噪声，单位阵
+    setIdentity(KF.measurementNoiseCov, Scalar::all(1e-1));//R高斯白噪声，单位阵
+    setIdentity(KF.errorCovPost, Scalar::all(1));//P后验误差估计协方差矩阵，初始化为单位阵
+    randn(KF.statePost, Scalar::all(0), Scalar::all(0.1));//初始化状态为随机值
+
 
     for(;;)
     {
@@ -34,7 +47,7 @@ int main()
         threshold(frame, frame, 160, 255,cv::THRESH_BINARY);//调阈值就差不多了
         // Find all the contours in the thresholded image
         vector<vector<Point>> contours;
-        imshow("sdfa",frame);
+        imshow("binary",frame);
         findContours(frame, contours, RETR_LIST, CHAIN_APPROX_NONE);
 
 
@@ -133,6 +146,19 @@ int main()
            double height_equal = abs(R[mark].center.x-RA[mark].center.x)/2;
            double width_equal =  abs((R[mark].size.height+RA[mark].size.height)/4);
 
+
+           Mat prediction = KF.predict();
+           Point predict_pt = Point((int)prediction.at<float>(0), (int)prediction.at<float>(1));
+
+           measurement.at<float>(0) = (float)center_x;
+           measurement.at<float>(1) = (float)center_y;
+           KF.correct(measurement);
+
+           circle(binary, predict_pt, 3, Scalar(34, 255, 255), -1);
+
+           center_x = (int)prediction.at<float>(0);
+           center_y = (int)prediction.at<float>(1);
+
            Mat cameraMatrix;
            Mat cameraDistCoeffs;
            FileStorage fs("/home/einstein/桌面/OpenCV3Cookbook-master/src/Chapter11/calib.xml", cv::FileStorage::READ);
@@ -184,6 +210,7 @@ int main()
               solvePnP(objectPoints, imagePoints, cameraMatrix, cameraDistCoeffs, rvec, tvec);
 
 
+
            Mat rotation;
            // convert vector-3 rotation
            // to a 3x3 rotation matrix
@@ -205,7 +232,6 @@ int main()
            cout << "x 角度 =  " << theta_x << endl;
            cout << "y 角度 =  " << theta_y << endl;
            cout << "z 角度 =  " << theta_z << endl <<endl;
-
         }
 
         imshow("okey",binary);
@@ -216,5 +242,4 @@ int main()
         cout<<"Time whole"<<totaltime<<"秒！"<<endl <<endl;
         hi = 0;
     }
-
 }
