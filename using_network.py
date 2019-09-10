@@ -32,7 +32,7 @@ with tf.Session() as sess:
         classId = int(out[3][0][i])
         score = float(out[1][0][i])
         bbox = [float(v) for v in out[2][0][i]]
-        if score > 0.3:
+        if score > 0.9:
             x = bbox[1] * cols
             y = bbox[0] * rows
             right = bbox[3] * cols
