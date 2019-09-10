@@ -19,6 +19,5 @@
     
 # PlanC
     using_network.py是神经网络版本。
-    對比赛没啥价值，有兴趣可以玩下。训练tensorflow模型参照以下网址：
-    https://www.52cv.net/?p=470
+    對比赛没啥价值，有兴趣可以玩下。
     
