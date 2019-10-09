@@ -20,4 +20,5 @@
 # PlanC
     using_network.py是神经网络版本。
     對比赛没啥价值，有兴趣可以玩下。
+    训练自己的卷积神经网络模型参数参照本文https://www.52cv.net/?p=470
     
